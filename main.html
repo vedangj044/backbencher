@@ -1,0 +1,212 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .popup{
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -12em;
+      margin-left: -18em;
+      background: white;
+      border-radius: 5px;
+    }
+    .option{
+      font-size: 25px;
+      font-family: monospace;
+      margin-left: 20px;
+    }
+    .field{
+      border-radius: 2px;
+      width: 300px;
+      float: right;
+      padding-left: 5px;
+    }
+    .field:hover{
+      border: 2px solid #20B2AA;
+    }
+    .field1{
+      background: #20B2AA;
+      color: white;
+      padding: 10px;
+    }
+    .field1:hover{
+      background: #87CEFA;
+    }
+    .cross{
+      float: right;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+    .head{
+      font-family: monospace;
+      background: #f1f1f1;
+      overflow: hidden;
+      padding: 10px 20px;
+    }
+    .popupButton{
+      float: right;
+      padding: 10px;
+      border-radius: 5px;
+      background: dodgerblue;
+      color: white;
+      margin: 5px;
+    }
+    .popupButton:hover{
+      background: #87CEFA;
+    }
+    body{
+      margin: 0;
+    }
+    .today{
+      margin: 10 20px;
+      font-family: courier;
+      border: 2px solid dodgerblue;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .total{
+      margin: 10 20px;
+      font-family: courier;
+      border: 2px solid tomato;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .footer{
+      background: #000000;
+      color: white;
+      text-align: right;
+      font-family: courier;
+      padding-top: 1px;
+      padding-bottom: 1px;
+      width: 100%;
+      bottom: 0;
+      position: fixed;
+      border-bottom: 2px solid dodgerblue;
+    }
+    .row{
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-right: 20px;
+    }
+    .card{
+      display: inline-block;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      background: #F5F5DC;
+      margin: 5px;
+    }
+    .card:hover{
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    .card p{
+      padding: 5px;
+      font-weight: bold;
+    }
+    ul{
+      list-style-type: none;
+      margin: 10px;
+      padding: 0;
+      overflow: hidden;
+    }
+    li{
+      float: left;
+    }
+    h6{
+      font-weight: normal;
+      font-family: serif;
+    }
+    .perce{
+      text-align: center;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+  $(function(){
+    $(".popup").hide();
+    $(".popupButton").click(function(){
+      var toStart = $(this).attr("data-toStart");
+      $("body").css({background: "#D3D3D3"});
+      $("#"+toStart).fadeToggle(500);
+      $(".main").find("*").attr('disabled', 'disabled').css({opacity: "0.5"});
+    });
+    $(".cross").click(function(){
+      $("body").css({background: "none"});
+      $(".popup").hide();
+      $(".main").find("*").removeAttr("disabled").css({opacity: "1.0"});
+    });
+  });
+  </script>
+</head>
+<body>
+  <div class="main">
+    <div class="head">
+      <button class="popupButton" id="loginButton" data-toStart="login">Login</button>
+      <button class="popupButton" id="signButton" data-toStart="signup">Sign Up</button>
+      <h1>Attendance Logger</h1>
+    </div>
+    <div class="today">
+      <h1>Today's Attendance</h1>
+      <ul>
+        <li><div class="card">
+          <p>Teacher's name</p>
+          <input type="radio" name="present" value="yes">Present today</input>
+          <input type="radio" name="present" value="noLecture">No lecture</input>
+        </div></li>
+      </ul>
+    </div>
+    <div class="total">
+      <h1>Total Attendance<h1>
+      <ul>
+        <li><div class="card">
+          <h6>Teacher's Name</h6>
+          <div class="perce">
+            <p>%Attendance</p>
+          </div>
+        </div></li>
+      </ul>
+    </div>
+    <div class="footer">
+      <p>A creation of <u>Vedang Joshi</u></p>
+    </div>
+  </div>
+  <div class='popup' id="login"><center>
+    <div class='valueOf'>
+      <p class="cross">&#10060;</p>
+      <h1>Login</h1>
+      <form name="loginForm">
+        <div class="row">
+          <label class="option">Username: </label>
+          <input class="field" type="text"></div><br>
+        <div class="row">
+          <label class="option">Password: </label>
+          <input class="field" type="password"></div><br>
+          <input class="field1" type="submit" value="Login"></input>
+      </form>
+    </div></center>
+  </div>
+  <div class="popup" id="signup"><center>
+    <div class='valueOf'>
+      <p class="cross" >&#10060;</p>
+      <h1>Sign Up</h1></center>
+      <form name="signForm">
+        <div class="row">
+          <label class="option">Name: </label>
+          <input class="field" type="text"></input></div><br>
+        <div class="row">
+          <label class="option">Username: </label>
+          <input class="field" type="text"></input></div><br>
+        <div class="row">
+          <label class="option">Password: </label>
+          <input class="field" type="password"></input></div><br>
+        <div class="row">
+          <label class="option">ReType Password: </label>
+          <input class="field" type="password"></input></div><br>
+        <center>
+          <input class="field1" type="submit" value="Sign UP"></input>
+        </center>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
